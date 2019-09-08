@@ -2,7 +2,7 @@ from enum import Enum
 import random
 import statistics
 import sys
-
+import subprocess
 numGenerations = 50
 mutateChance = 0.02
 operationMutateChance = 0.30
@@ -162,7 +162,7 @@ def main():
                 chromosome.write(out)
         out.close()
 
-        # subprocess call here
+        supprocess.call('./a.out')
 
         nextBredGeneration = breedChromosomes(cullPopulation(population, calculateFitness(getResults())))
         population = nextBredGeneration + createChromosomes(populationSize - len(nextBredGeneration))

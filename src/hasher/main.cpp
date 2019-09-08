@@ -24,7 +24,7 @@ string gen_random(string s, const int len) {
     return a;
 }
 int main(){
-ifstream f("outfile.txt");
+ifstream f("../genetics/outfile.txt");
 	if (f.fail()) {
 		return 1;
 	}
@@ -49,7 +49,7 @@ for(int i = 0; i<1000; i++) {
     list[i] = gen_random(s,len);
 }
 ofstream a;
-a.open("infile.txt");
+a.open("../genetics/infile.txt");
 for(int i =0; i < pol.size(); i++) {
     hashtable h(pol[i]);
      for(int j =0; j < 1000; j++) {

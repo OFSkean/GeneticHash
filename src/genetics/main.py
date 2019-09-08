@@ -3,6 +3,7 @@ import random
 import statistics
 import sys
 import subprocess
+
 numGenerations = 50
 mutateChance = 0.02
 operationMutateChance = 0.30
@@ -22,7 +23,7 @@ class GeneType(Enum):
 class Operation:
     def __init__(self):
         self.op = random.randint(0, 7)
-        self.value = random.randint(0, sys.maxsize)
+        self.value = random.randint(0, 320000)
 
     def write(self, outfile):
         outfile.write(str(self.op) + ' ' + str(self.value) + ' ')
@@ -30,7 +31,7 @@ class Operation:
     def mutate(self):
         if random.random() < operationMutateChance:
             self.op = random.randint(0, 7)
-            self.value = random.randint(0, sys.maxsize)
+            self.value = random.randint(0, 32000)
         return self
 
 
@@ -162,7 +163,7 @@ def main():
                 chromosome.write(out)
         out.close()
 
-        supprocess.call('./a.out')
+        subprocess.call('../hasher/a.out')
 
         nextBredGeneration = breedChromosomes(cullPopulation(population, calculateFitness(getResults())))
         population = nextBredGeneration + createChromosomes(populationSize - len(nextBredGeneration))

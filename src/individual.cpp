@@ -31,8 +31,9 @@ void individual::setK(string line){
    }
    string number = "";
    for(int i = size;i<line.length() + 1;i++) { 
-       while(line[i] != ' '&& line.length()) {
+       while(line[i] != ' ' && i < line.length()) {
            number += line[i];
+		   i++;
        }
     kVals.push_back(stoi(number));
    }
@@ -44,8 +45,9 @@ int size = (int)line[0];
    }
    string number = "";
    for(int i = size;i<line.length() + 1;i++) { 
-       while(line[i] != ' '&& line.length()) {
+       while(line[i] != ' '&& i < line.length()) {
            number += line[i];
+		   i++;
        }
     hVals.push_back(stoi(number));
    }
@@ -54,11 +56,13 @@ void individual::setR(string line){
 int size = (int)line[0];
    for(int i =1; i<size+1; i++) {
        rOps.push_back((int)line[i]);
+	   i++;
    }
    string number = "";
    for(int i = size;i<line.length() + 1;i++) { 
-       while(line[i] != ' '&& line.length()) {
+       while(line[i] != ' '&& i<line.length()) {
            number += line[i];
+		   i++;
        }
     rVals.push_back(stoi(number));
    }
@@ -70,8 +74,9 @@ int size = (int)line[0];
    }
    string number = "";
    for(int i = size;i<line.length() + 1;i++) { 
-       while(line[i] != ' '&& line.length()) {
+       while(line[i] != ' '&& i< line.length()) {
            number += line[i];
+		   i++;
        }
     fVals.push_back(stoi(number));
    }

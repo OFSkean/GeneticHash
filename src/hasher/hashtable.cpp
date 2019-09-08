@@ -20,7 +20,7 @@ hashtable::hashtable(individual i){
 node* hashtable::insert(string newlex){
     node* s = search(newlex);
 	if (!s) {
-		int hv = hash(newlex);
+		int hv = hash(newlex)%1000;
 		s = new node;
 		s->value=newlex;
 		s->next = bucket[hv];
@@ -29,7 +29,7 @@ node* hashtable::insert(string newlex){
 	return s;
 } 
 node* hashtable::search(string lex){
-    int hv = hash(lex);
+    int hv = hash(lex)%1000;
 	node* p = bucket[hv];
 	while (p) {
 		if (p->value == lex)
@@ -43,13 +43,12 @@ int hashtable::hash(string s) {
     int r;
     clock_t start;
     float duration;
-
     start = std::clock();
 
-    r = (int)i.hash(reinterpret_cast<const uint8_t*>(&s[0]),s.length(),seed);
+    r = (int)i.hash(reinterpret_cast<const uint8_t*>(&s[0]),(size_t)s.length(),seed);
     duration = ( clock() - start ) / (float) CLOCKS_PER_SEC;
     s[0] ^= 1;
-    int b = (int)i.hash(reinterpret_cast<const uint8_t*>(&s[0]),s.length(),seed); 
+    int b = (int)i.hash(reinterpret_cast<const uint8_t*>(&s[0]),(size_t)s.length(),seed); 
     i.performaceValues[2] += hammingDistance(r,b)/(float)1000;
     i.performaceValues[0] += duration/(float)1000;
     return r; 

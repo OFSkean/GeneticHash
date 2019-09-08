@@ -8,23 +8,19 @@
 using namespace std;
 
 
-string gen_random(string s, const int len) {
+string gen_random(const int len) {
     static const char alphanum[] =
         "0123456789"
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         "abcdefghijklmnopqrstuvwxyz";
-
-    for (int i = 0; i < len; ++i) {
-        s[i] = alphanum[rand() % (sizeof(alphanum) - 1)];
-    }
-
-    s[len] = 0;
-    string a = s;
-    s = "";
-    return a;
+    string s ="";
+    for (int i = 0; i < len; i++) {
+        s += alphanum[rand() % (sizeof(alphanum) - 1)];
+    } 
+    return s;
 }
 int main(){
-ifstream f("../genetics/outfile.txt");
+ifstream f("outfile.txt");
 	if (f.fail()) {
 		return 1;
 	}
@@ -34,7 +30,7 @@ int count  = 1;
 while(!f.eof()) {
     getline(f,line);
     switch(count) {
-        case 1: pol.push_back(* new individual((int)line[0])); break;
+        case 1: pol.push_back(* new individual((int)line[0]-48)); break;
         case 2: pol.back().setK(line); break;
         case 3: pol.back().setH(line); break;
         case 4: pol.back().setR(line); break;
@@ -44,12 +40,11 @@ while(!f.eof()) {
 }
 string list[1000];
 for(int i = 0; i<1000; i++) {
-    string s;
-    int len = rand()%30+1;
-    list[i] = gen_random(s,len);
+    int len = rand()%30+1; 
+    list[i] = gen_random(len);
 }
 ofstream a;
-a.open("../genetics/infile.txt");
+a.open("infile.txt");
 for(int i =0; i < pol.size(); i++) {
     hashtable h(pol[i]);
      for(int j =0; j < 1000; j++) {
@@ -57,6 +52,7 @@ for(int i =0; i < pol.size(); i++) {
      }
      h.findCollisions();
      a << pol[i].performaceValues[0] <<pol[i].performaceValues[1] <<pol[i].performaceValues[2];
+     a<<endl;
 }
 	
 	a.close();
